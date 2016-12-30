@@ -1,0 +1,25 @@
+{
+  "name": "search-abstraction-layer",
+  "version": "1.0.0",
+  "description": "FreeCodeCamp Project 5",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Matthew-Burfield/search-abstraction-layer.git"
+  },
+  "author": "Matthew Burfield",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Matthew-Burfield/search-abstraction-layer/issues"
+  },
+  "homepage": "https://github.com/Matthew-Burfield/search-abstraction-layer#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
