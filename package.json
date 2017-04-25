@@ -4,6 +4,7 @@
   "description": "FreeCodeCamp Project 5",
   "main": "index.js",
   "scripts": {
+    "start": "nf run nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,9 +18,18 @@
   },
   "homepage": "https://github.com/Matthew-Burfield/search-abstraction-layer#readme",
   "dependencies": {
-    "express": "^4.14.0"
+    "axios": "^0.16.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-node": "^4.2.2",
+    "express": "^4.14.0",
+    "foreman": "^2.0.0",
+    "mongodb": "^2.2.26"
   },
   "devDependencies": {
+    "eslint": "3.19.0",
+    "eslint-config-standard": "10.2.1",
+    "eslint-plugin-promise": "3.5.0",
+    "eslint-plugin-standard": "3.0.1",
     "nodemon": "^1.11.0"
   }
 }
