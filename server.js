@@ -64,6 +64,10 @@ app.get('/recentsearches', function (req, res) {
   getLatestEntries((docs) => res.json(docs))
 })
 
+app.get('/', function (req, res) {
+  res.send('Welcome to image search api')
+})
+
 app.get('/api/', function (req, res) {
   const searchString = req.query.search
   const offset = req.query.offset
