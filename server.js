@@ -38,36 +38,37 @@ const addToRecentEntries = entry => {
   })
 }
 
-const getLatestEntries = () => {
-  let latestEntries = []
+const getLatestEntries = (callback) => {
   mongodb.MongoClient.connect(MONGO_URL, (err, db) => {
     if (err) throw err
 
-    const recentSearches = db.collection('recentsearches')
+    const collection = db.collection('recentsearches')
 
-    recentSearches.find().sort({when: 1}).limit(10).toArray((err, arr) => {
+    collection.find().sort({ when: -1 }).toArray((err, docs) => {
       if (err) throw err
-      latestEntries = [...arr]
+
+      db.close(err => {
+        if (err) throw err
+      })
+      callback(docs)
     })
 
-    db.close(err => {
-      if (err) throw err
-    })
+    // recentSearches.find().toArray((err, arr) => {
+    //   if (err) throw err
+    //   latestEntries = [...arr]
+    // })
   })
-  return latestEntries
 }
 
 app.get('/recentsearches', function (req, res) {
-  console.log(getLatestEntries())
-  res.send('...loading')
+  getLatestEntries((docs) => res.json(docs))
 })
 
-app.get('/', function (req, res) {
+app.get('/api/', function (req, res) {
   const searchString = req.query.search
   const offset = req.query.offset
 
-  if (searchString !== undefined || searchString === '') { 
-
+  if (searchString !== undefined || searchString === '') {
     const baseUrl = 'https://api.imgur.com/3/gallery/search/top'
     const url = `${baseUrl}/${offset || 1}/?q=${searchString}`
 
@@ -79,6 +80,7 @@ app.get('/', function (req, res) {
       addToRecentEntries(searchString)
       res.json(JSON.stringify(mapAPI(response.data.data)))
     }).catch(function (error) {
+      if (error) throw error
       res.send('some error occured')
     })
   } else {
